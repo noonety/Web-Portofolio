@@ -1,21 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "@/generated/prisma/client"; // Sesuaikan dengan path prisma client kamu
-import { createClient } from "@supabase/supabase-js";
-
-const prisma = new PrismaClient();
-
-// Inisialisasi Supabase Client khusus untuk server-side operation
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
+import { prisma } from "@/lib/prisma";
+import { getSupabaseClient } from "@/lib/supabase";
 
 const BUCKET_NAME = "portfolio-assets";
-const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB sesuai standard PRD
+const MAX_FILE_SIZE = 5 * 1024 * 1024;
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif", "application/pdf"];
 
 export async function POST(req: NextRequest) {
   try {
+    const supabase = getSupabaseClient();
     // TODO: Di Fase 3 nanti, kita akan selipkan validasi NextAuth session di sini 
     // untuk mengunci agar hanya admin login yang bisa upload berkas.
 
