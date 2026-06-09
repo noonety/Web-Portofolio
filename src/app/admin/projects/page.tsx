@@ -1,7 +1,5 @@
 import Link from "next/link";
-import { PrismaClient } from "@/generated/prisma/client"; // 1. Sesuaikan path Prisma Client kamu jika berbeda
-
-const prisma = new PrismaClient();
+import { prisma } from "@/lib/prisma";
 
 // 2. Mengambil data proyek langsung dari PostgreSQL via Prisma secara aman di sisi server
 async function getProjects() {

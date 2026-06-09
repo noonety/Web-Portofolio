@@ -1,7 +1,5 @@
 import Link from "next/link";
-import { PrismaClient } from "@/generated/prisma/client"; // 1. Sesuaikan path Prisma Client kamu
-
-const prisma = new PrismaClient();
+import { prisma } from "@/lib/prisma";
 
 async function getStats() {
   try {

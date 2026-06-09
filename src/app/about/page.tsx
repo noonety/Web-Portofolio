@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { PrismaClient } from "@/generated/prisma/client"; // 1. Sesuaikan path Prisma Client kamu jika berbeda
+import { prisma } from "@/lib/prisma";
 
 export const metadata: Metadata = {
   title: "Tentang Saya",
   description: "Profil dan latar belakang saya",
 };
 
-const prisma = new PrismaClient();
+export const dynamic = "force-dynamic";
 
 // 2. Fungsi mengambil data pengalaman dari database berdasarkan tipe dan diurutkan dari yang terbaru
 async function getExperiences() {
