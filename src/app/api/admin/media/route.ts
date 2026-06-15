@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { getSupabaseClient } from "@/lib/supabase";
+
+export const dynamic = "force-dynamic";
 
 const BUCKET_NAME = "portfolio-assets";
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
@@ -8,6 +9,7 @@ const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif", "ap
 
 export async function POST(req: NextRequest) {
   try {
+    const { getSupabaseClient } = await import("@/lib/supabase");
     const supabase = getSupabaseClient();
     // TODO: Di Fase 3 nanti, kita akan selipkan validasi NextAuth session di sini 
     // untuk mengunci agar hanya admin login yang bisa upload berkas.
